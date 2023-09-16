@@ -6,6 +6,7 @@ extends CharacterBody2D
 
 @onready var sprite_2d = $Sprite2D
 @onready var dash_timer = $DashTimer
+@onready var gpu_particles_2d = $GPUParticles2D
 
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -20,9 +21,11 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("dash") and not is_player_dashing:
 		velocity.x = DASH_SPEED if sprite_2d.flip_h else -DASH_SPEED
+		gpu_particles_2d.process_material.initial_velocity_min = abs(gpu_particles_2d.process_material.initial_velocity_min) if sprite_2d.flip_h else gpu_particles_2d.process_material.initial_velocity_min
 		IS_INPUT_DISABLED = true
 		is_player_dashing = true
 		dash_timer.start(DASH_TIME)
+		gpu_particles_2d.restart()
 		
 	if not IS_INPUT_DISABLED:
 		# Allow the player to jump 
