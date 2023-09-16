@@ -44,7 +44,7 @@ sources/0 = SubResource("TileSetAtlasSource_aiiyq")
 tile_set = SubResource("TileSet_ku7nt")
 cell_quadrant_size = 18
 format = 2
-layer_0/tile_data = PackedInt32Array(131075, 65536, 0, 196616, 65536, 0, 262157, 65536, 0)
+layer_0/tile_data = PackedInt32Array(131075, 65536, 0, 196616, 65536, 0, 262157, 65536, 0, 262160, 65536, 0, 262163, 65536, 0, 262166, 65536, 0, 262169, 65536, 0, 327708, 65536, 0, 393247, 65536, 0, 393250, 65536, 0, 393253, 65536, 0, 393256, 65536, 0)
 
 [node name="Player" parent="." instance=ExtResource("2_nyd2j")]
 position = Vector2(241, 36)
