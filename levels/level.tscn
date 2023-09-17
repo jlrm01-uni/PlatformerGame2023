@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://d4ae6r5fa1p42"]
+[gd_scene load_steps=6 format=3 uid="uid://d4ae6r5fa1p42"]
 
 [ext_resource type="Texture2D" uid="uid://f5svv8ato4i1" path="res://assets/art/tiles/tiles_packed.png" id="1_qt7fs"]
+[ext_resource type="Texture2D" uid="uid://gjahlsev54o0" path="res://2023-09-17 01 15 09 openOutpaint image.png" id="1_rf7sk"]
 [ext_resource type="PackedScene" uid="uid://cso6xka8c0ij4" path="res://player/player.tscn" id="2_nyd2j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aiiyq"]
@@ -40,11 +41,21 @@ sources/0 = SubResource("TileSetAtlasSource_aiiyq")
 
 [node name="level" type="Node2D"]
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2(0, 100)
+transform = Transform2D(1, 0, 0, 1, 0, 100)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1536, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("1_rf7sk")
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ku7nt")
 cell_quadrant_size = 18
 format = 2
-layer_0/tile_data = PackedInt32Array(131075, 65536, 0, 196616, 65536, 0, 262157, 65536, 0)
+layer_0/tile_data = PackedInt32Array(131075, 65536, 0, 196616, 65536, 0, 262157, 65536, 0, 262160, 65536, 0, 262163, 65536, 0, 262167, 65536, 0, 393243, 65536, 0, 393246, 65536, 0, 393249, 65536, 0, 458790, 65536, 0, 458793, 65536, 0, 458796, 65536, 0, 458799, 65536, 0, 458804, 65536, 0, 458807, 65536, 0, 524347, 65536, 0, 524348, 65536, 0, 524349, 65536, 0, 524350, 65536, 0, 458814, 65536, 0, 458815, 65536, 0, 458816, 65536, 0, 458817, 65536, 0, 458818, 65536, 0, 458819, 65536, 0, 524356, 65536, 0, 524357, 65536, 0, 524358, 65536, 0, 524359, 65536, 0, 524360, 65536, 0, 524361, 65536, 0, 524362, 65536, 0, 524363, 65536, 0, 524364, 65536, 0, 524365, 65536, 0, 524366, 65536, 0, 524367, 65536, 0, 524368, 65536, 0, 524369, 65536, 0, 524370, 65536, 0, 524371, 65536, 0, 524372, 65536, 0, 524373, 65536, 0, 524374, 65536, 0, 524375, 65536, 0, 524376, 65536, 0, 524377, 65536, 0, 524378, 65536, 0, 524379, 65536, 0, 524380, 65536, 0, 524381, 65536, 0, 524382, 65536, 0, 524383, 65536, 0, 524384, 65536, 0, 524385, 65536, 0, 524386, 65536, 0, 524387, 65536, 0, 524388, 65536, 0, 524389, 65536, 0, 524390, 65536, 0, 524391, 65536, 0, 524392, 65536, 0, 524393, 65536, 0, 524394, 65536, 0, 524395, 65536, 0, 524396, 65536, 0, 524397, 65536, 0, 524398, 65536, 0, 524399, 65536, 0, 458864, 65536, 0, 458865, 65536, 0, 458866, 65536, 0, 458867, 65536, 0, 458868, 65536, 0, 458869, 65536, 0, 458870, 65536, 0, 458871, 65536, 0, 458872, 65536, 0, 458873, 65536, 0, 458874, 65536, 0)
 
 [node name="Player" parent="." instance=ExtResource("2_nyd2j")]
 position = Vector2(241, 36)
