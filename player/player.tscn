@@ -8,9 +8,11 @@ radius = 9.0
 height = 24.0
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 30
 script = ExtResource("1_ubv0e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("1_fam8s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

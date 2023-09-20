@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://dj8qe84mafwm3"]
+
+[ext_resource type="Script" path="res://scripts/coin.gd" id="1_j6j5m"]
+[ext_resource type="Texture2D" uid="uid://cskll076acrs3" path="res://assets/art/single tiles/tile_0151.png" id="1_xwq1p"]
+[ext_resource type="Texture2D" uid="uid://d0oje1oamir3c" path="res://assets/art/single tiles/tile_0152.png" id="2_hsc8b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i465j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xwq1p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_hsc8b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hl5v3"]
+radius = 10.198
+
+[node name="coin" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_j6j5m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_i465j")
+autoplay = "default"
+frame_progress = 0.733469
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hl5v3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

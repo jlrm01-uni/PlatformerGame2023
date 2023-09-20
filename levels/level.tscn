@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d4ae6r5fa1p42"]
+[gd_scene load_steps=6 format=3 uid="uid://d4ae6r5fa1p42"]
 
 [ext_resource type="Texture2D" uid="uid://f5svv8ato4i1" path="res://assets/art/tiles/tiles_packed.png" id="1_qt7fs"]
 [ext_resource type="PackedScene" uid="uid://cso6xka8c0ij4" path="res://player/player.tscn" id="2_nyd2j"]
+[ext_resource type="PackedScene" uid="uid://dj8qe84mafwm3" path="res://items/coin.tscn" id="3_mnsvj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aiiyq"]
 texture = ExtResource("1_qt7fs")
@@ -35,10 +36,12 @@ texture_region_size = Vector2i(18, 18)
 
 [sub_resource type="TileSet" id="TileSet_ku7nt"]
 tile_size = Vector2i(18, 18)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 8
+physics_layer_0/collision_mask = 5
 sources/0 = SubResource("TileSetAtlasSource_aiiyq")
 
 [node name="level" type="Node2D"]
+texture_filter = 1
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ku7nt")
@@ -48,3 +51,8 @@ layer_0/tile_data = PackedInt32Array(131075, 65536, 0, 196616, 65536, 0, 262157,
 
 [node name="Player" parent="." instance=ExtResource("2_nyd2j")]
 position = Vector2(241, 36)
+
+[node name="coins" type="Node2D" parent="."]
+
+[node name="coin" parent="coins" instance=ExtResource("3_mnsvj")]
+position = Vector2(240, 64)
