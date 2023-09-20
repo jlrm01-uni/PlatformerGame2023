@@ -1,6 +1,6 @@
 extends Area2D
 
-# @export_file("*.tscn") var scene
+@export_file("*.tscn") var scene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,7 +14,4 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if body.name == "Player":
-		print("Collected a coin!")
-		queue_free()
-		GameState.current_coins += 1
-		print(GameState.current_coins)
+		get_tree().change_scene_to_file(scene)

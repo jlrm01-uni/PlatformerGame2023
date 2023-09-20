@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://bosucnj5jdsys"]
+
+[ext_resource type="Script" path="res://scripts/goal_flag.gd" id="1_6a5m2"]
+[ext_resource type="Texture2D" uid="uid://dj2wvjyl1lgk0" path="res://assets/art/single tiles/tile_0111.png" id="1_k4dm6"]
+[ext_resource type="Texture2D" uid="uid://de4x4nnjr1rqp" path="res://assets/art/single tiles/tile_0112.png" id="2_nrhcu"]
+[ext_resource type="Texture2D" uid="uid://bx7imkknhvn0j" path="res://assets/art/single tiles/tile_0131.png" id="3_ix3vg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_whg7a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_k4dm6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_nrhcu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xb0gu"]
+size = Vector2(35, 38)
+
+[node name="GoalFlag" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_6a5m2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_whg7a")
+autoplay = "default"
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D"]
+texture_filter = 1
+position = Vector2(0, 18)
+texture = ExtResource("3_ix3vg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 9)
+shape = SubResource("RectangleShape2D_xb0gu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
