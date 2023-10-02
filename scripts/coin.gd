@@ -1,10 +1,10 @@
 extends Area2D
 
-# @export_file("*.tscn") var scene
+@onready var collect_sound = preload("res://assets/sounds/kenney_impactsounds/Audio/footstep_wood_003.ogg")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	AudioManager.register("collect_coin", collect_sound)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,3 +18,5 @@ func _on_body_entered(body):
 		queue_free()
 		GameState.current_coins += 1
 		print(GameState.current_coins)
+		
+		AudioManager.play_sound("collect_coin")
