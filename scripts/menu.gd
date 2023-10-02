@@ -6,10 +6,12 @@ extends Control
 @onready var play_button_sound = load("res://assets/sounds/kenney_interfacesounds/Audio/error_004.ogg")
 @onready var load_button_sound = load("res://assets/sounds/kenney_impactsounds/Audio/footstep_grass_004.ogg")
 @onready var pressed_button_sound = load("res://assets/sounds/kenney_interfacesounds/Audio/confirmation_001.ogg")
+@export var menu_music: AudioStream
 
 var sounds: Dictionary
 
 # Called when the node enters the scene tree for the first time.
+
 func _ready():
 	sounds = {
 		"continue": hover_sound,
@@ -17,6 +19,11 @@ func _ready():
 		"load": load_button_sound,
 	}
 
+	if menu_music:
+		SoundAndMusicPlayer.register("menu_music", menu_music)
+		SoundAndMusicPlayer.play_music("menu_music")
+	else:
+		print("You forgot to set the menu music!")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
