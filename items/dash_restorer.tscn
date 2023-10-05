@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://c0v8xe5w7jslx"]
+
+[ext_resource type="Script" path="res://scripts/dash_restorer.gd" id="1_7u3tt"]
+[ext_resource type="Texture2D" uid="uid://dk12pay8kreqk" path="res://assets/art/individual tiles/tile_0067.png" id="1_d6dyd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w8j20"]
+
+[sub_resource type="Animation" id="Animation_x4bkc"]
+resource_name = "modulate_sprite"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 0.356863, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_cpkeq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a5vxa"]
+_data = {
+"RESET": SubResource("Animation_cpkeq"),
+"modulate_sprite": SubResource("Animation_x4bkc")
+}
+
+[node name="dash_restorer" type="Area2D"]
+script = ExtResource("1_7u3tt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_w8j20")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_d6dyd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "modulate_sprite"
+libraries = {
+"": SubResource("AnimationLibrary_a5vxa")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

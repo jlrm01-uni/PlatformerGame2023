@@ -14,18 +14,26 @@ var IS_INPUT_DISABLED = false
 var DASH_TIME = 0.2
 var is_player_dashing = false
 
+@export var DASHES_AVAILABLE = 3
+@export var MAX_DASHES = 3
+
 func _physics_process(delta):
 	# apply gravity to player, only when not touching the floor
 	if not is_on_floor() and not is_player_dashing:
 		velocity.y += GRAVITY * delta
 	
-	if Input.is_action_just_pressed("dash") and not is_player_dashing:
+	# reset dashes
+	if is_on_floor():
+		DASHES_AVAILABLE = MAX_DASHES
+		
+	if Input.is_action_just_pressed("dash") and not is_player_dashing and DASHES_AVAILABLE:
 		velocity.x = DASH_SPEED if sprite_2d.flip_h else -DASH_SPEED
 		gpu_particles_2d.process_material.initial_velocity_min = abs(gpu_particles_2d.process_material.initial_velocity_min) if sprite_2d.flip_h else gpu_particles_2d.process_material.initial_velocity_min
 		IS_INPUT_DISABLED = true
 		is_player_dashing = true
 		dash_timer.start(DASH_TIME)
 		gpu_particles_2d.restart()
+		decrease_dash_amount()
 		
 	if not IS_INPUT_DISABLED:
 		# Allow the player to jump 
@@ -61,3 +69,21 @@ func _on_dash_timer_timeout():
 	IS_INPUT_DISABLED = false
 	
 	velocity.x = 0
+
+func reset_dashes():
+	DASHES_AVAILABLE = MAX_DASHES
+	
+func decrease_dash_amount(how_many=1):
+	var new_value = DASHES_AVAILABLE - how_many
+	
+	if new_value < 0:
+		DASHES_AVAILABLE = 0
+	else:
+		DASHES_AVAILABLE = new_value
+	
+func increase_dash_amount(how_many=1):
+	var new_value = DASHES_AVAILABLE + how_many
+	
+	if new_value < MAX_DASHES:
+		DASHES_AVAILABLE += 1
+		
