@@ -1,0 +1,29 @@
+{
+"@path": "res://addons/dialogic/Resources/character.gd",
+"@subpath": NodePath(""),
+"color": Color(0.894118, 0.117647, 0.117647, 1),
+"custom_info": {
+"sound_mood_default": "",
+"sound_moods": {},
+"style": ""
+},
+"default_portrait": "New portrait",
+"description": "",
+"display_name": "character3",
+"mirror": false,
+"nicknames": [""],
+"offset": Vector2(0, 0),
+"portraits": {
+"New portrait": {
+"export_overrides": {
+"image": "\"res://assets/characters_realistic/female_astronaut_1.png\""
+},
+"image": "",
+"mirror": true,
+"offset": Vector2(-120, 0),
+"scale": 0.6,
+"scene": ""
+}
+},
+"scale": 1.0
+}

@@ -1,0 +1,7 @@
+Join character2 4
+Join character3 1
+[call_node path="Cutscene1" method="play_cutscene_music"]
+[background arg="res://assets/art/backgrounds/space_background.png" fade="1.0"]
+character2 (normal): This is me talking
+character3: Testing...
+[end_timeline]

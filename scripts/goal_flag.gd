@@ -14,4 +14,4 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if body.name == "Player":
-		get_tree().change_scene_to_file(scene)
+		FadeScreen.transition_to(scene)
