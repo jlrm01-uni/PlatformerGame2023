@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d4ae6r5fa1p42"]
+[gd_scene load_steps=12 format=3 uid="uid://d4ae6r5fa1p42"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_d6s8w"]
 [ext_resource type="Texture2D" uid="uid://f5svv8ato4i1" path="res://assets/art/tiles/tiles_packed.png" id="1_qt7fs"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cskll076acrs3" path="res://assets/art/single tiles/tile_0151.png" id="4_8fayk"]
 [ext_resource type="FontFile" uid="uid://cd7l743mmwp0k" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="4_wbwyi"]
 [ext_resource type="PackedScene" uid="uid://bosucnj5jdsys" path="res://items/goal_flag.tscn" id="7_rawsp"]
+[ext_resource type="PackedScene" uid="uid://ckfmse1fplmv6" path="res://NPCs/standing_npc.tscn" id="8_ifa7u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aiiyq"]
 texture = ExtResource("1_qt7fs")
@@ -92,3 +93,7 @@ scene = "res://cutscenes/cutscene_1.tscn"
 
 [node name="coin" parent="." instance=ExtResource("3_mnsvj")]
 position = Vector2(357, 59)
+
+[node name="StandingNPC" parent="." instance=ExtResource("8_ifa7u")]
+position = Vector2(298, 62)
+timelines = Array[String](["res://NPCs/npc_timelines/level1_npc_timeline1.dtl", "res://NPCs/npc_timelines/level1_npc_timeline2.dtl"])

@@ -16,6 +16,8 @@ var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var jump_sound = preload("res://assets/sounds/kenney_interfacesounds/Audio/select_001.ogg")
 
+var entity = null
+
 func _physics_process(delta):
 	# apply gravity to player, only when not touching the floor
 	if not is_on_floor() and not is_player_dashing:
@@ -65,3 +67,12 @@ func _on_dash_timer_timeout():
 	IS_INPUT_DISABLED = false
 	
 	velocity.x = 0
+
+func _input(event):
+	if event.is_action_pressed("interact") and entity:
+#		get_viewport().set_input_as_handled()
+		entity.interact()
+	
+func set_entity(root_node_of_entity):
+	entity = root_node_of_entity
+	

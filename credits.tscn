@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnlnh8wg2arlj"]
+
+[ext_resource type="Script" path="res://scripts/credits.gd" id="1_rm1ql"]
+[ext_resource type="LabelSettings" uid="uid://df53ytygveify" path="res://credits_label_settings.tres" id="2_0k1kw"]
+[ext_resource type="Texture2D" uid="uid://bo5auy12cawl3" path="res://assets/characters_realistic/8ad914faf047e39f415cc59dcfd2b1fb.png" id="3_77ecy"]
+
+[sub_resource type="Animation" id="Animation_cx2kv"]
+resource_name = "roll_credits"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i8j43"]
+_data = {
+"roll_credits": SubResource("Animation_cx2kv")
+}
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rm1ql")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer"]
+layout_mode = 2
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "
+
+
+
+
+
+
+
+Credits
+
+Programming:
+jlrm01
+
+Art by:
+Kenney and Stable Diffusion
+
+Characters:"
+label_settings = ExtResource("2_0k1kw")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Scientist"
+label_settings = ExtResource("2_0k1kw")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_77ecy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i8j43")
+}

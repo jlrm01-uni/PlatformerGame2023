@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://df53ytygveify"]
+
+[sub_resource type="SystemFont" id="SystemFont_pwfum"]
+font_names = PackedStringArray("Input Sans")
+
+[resource]
+font = SubResource("SystemFont_pwfum")
+font_size = 59
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 5)

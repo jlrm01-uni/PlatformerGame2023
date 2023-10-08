@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://ckfmse1fplmv6"]
+
+[ext_resource type="Texture2D" uid="uid://koirp3y0qhp1" path="res://assets/art/characters/NPCs/character_0006.png" id="1_df45d"]
+[ext_resource type="Script" path="res://NPCs/npc_scripts/standing_npc.gd" id="1_djru2"]
+[ext_resource type="FontFile" uid="uid://cd7l743mmwp0k" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="4_kmg5i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wi3it"]
+size = Vector2(82, 35)
+
+[sub_resource type="Animation" id="Animation_1cq4x"]
+resource_name = "brighten"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.619608, 0.619608, 0.619608, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0rjmo"]
+_data = {
+"brighten": SubResource("Animation_1cq4x")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_1gp4f"]
+font = ExtResource("4_kmg5i")
+font_size = 24
+font_color = Color(0.886275, 0.560784, 0.101961, 1)
+
+[node name="StandingNPC" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_djru2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -5.5)
+shape = SubResource("RectangleShape2D_wi3it")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.619608, 0.619608, 0.619608, 1)
+texture = ExtResource("1_df45d")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0rjmo")
+}
+
+[node name="AlertLabel" type="Label" parent="."]
+offset_left = -6.0
+offset_top = -36.0
+offset_right = 34.0
+offset_bottom = -11.0
+text = "!"
+label_settings = SubResource("LabelSettings_1gp4f")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
