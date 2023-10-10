@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://mto2g4xx62r8"]
+[gd_scene load_steps=8 format=3 uid="uid://mto2g4xx62r8"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_sdqs0"]
 [ext_resource type="Texture2D" uid="uid://cilm8bqq1o2jh" path="res://assets/art/backgrounds/andrew-ridley-jR4Zf-riEjI-unsplash.jpg" id="1_tdday"]
+[ext_resource type="AudioStream" uid="uid://dswyd2xgvmqgw" path="res://assets/music/Juhani Junkala [Retro Game Music Pack]/Juhani Junkala [Retro Game Music Pack] Title Screen.wav" id="2_mp5dy"]
 [ext_resource type="FontFile" uid="uid://cd7l743mmwp0k" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="2_xj7t4"]
 
 [sub_resource type="Animation" id="Animation_er7gi"]
@@ -49,6 +50,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sdqs0")
+menu_music = ExtResource("2_mp5dy")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1

@@ -22,11 +22,22 @@ func play_sound(name: String):
 func play_music(name: String, fade_out: float=1.0, fade_in: float=1.0):
 	var current_music = registered_audio.get(name)
 	
-	if current_music:
+	if not current_music:
+		print("Couldn't find music: " + name)
+		return
+		
+	if music_audio_stream_player.playing:
+		var tween = get_tree().create_tween()
+		
+		tween.tween_property(music_audio_stream_player, 
+							 "volume_db", -80, fade_out)
+		tween.tween_callback(music_audio_stream_player.set_stream.bind(current_music))
+		tween.tween_callback(music_audio_stream_player.play)
+		tween.tween_property(music_audio_stream_player, 
+							 "volume_db", 0, fade_in)
+	else:
 		music_audio_stream_player.stream = current_music
 		music_audio_stream_player.play()
-	else:
-		print("Music is not registered: " + name)
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
