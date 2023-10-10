@@ -18,11 +18,22 @@ var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var entity = null
 
+# DEATH-related
+@export var DEATH_DEPTH: int = -1  # Y value at which player dies. -1 disables it
+@onready var animation_player = $AnimationPlayer
+@onready var death_particles = $DeathParticles
+@export var affected_by_gravity = true
+var is_dying = false
+
 func _physics_process(delta):
 	# apply gravity to player, only when not touching the floor
+	if is_dying:
+		return
+			
 	if not is_on_floor() and not is_player_dashing:
 		velocity.y += GRAVITY * delta
-	
+
+		
 	if Input.is_action_just_pressed("dash") and not is_player_dashing:
 		velocity.x = DASH_SPEED if sprite_2d.flip_h else -DASH_SPEED
 		IS_INPUT_DISABLED = true
@@ -52,6 +63,19 @@ func _physics_process(delta):
 		
 	move_and_slide()
 	
+	verify_death()
+	
+func verify_death():
+	# check Y
+	if DEATH_DEPTH != -1:
+		if position.y >= DEATH_DEPTH:
+			die()
+	
+func die():
+	is_dying = true
+	IS_INPUT_DISABLED = true
+	animation_player.play("death_animation")
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	AudioManager.register("player_jump_sound", jump_sound)
@@ -76,3 +100,5 @@ func _input(event):
 func set_entity(root_node_of_entity):
 	entity = root_node_of_entity
 	
+func after_death_animation():
+	get_tree().reload_current_scene()
