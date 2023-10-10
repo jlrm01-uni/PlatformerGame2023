@@ -19,6 +19,7 @@ var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 var entity = null
 
 # DEATH-related
+@export var CAN_DIE_FROM_DEPTH: bool = true
 @export var DEATH_DEPTH: int = -1  # Y value at which player dies. -1 disables it
 @onready var animation_player = $AnimationPlayer
 @onready var death_particles = $DeathParticles
@@ -67,7 +68,7 @@ func _physics_process(delta):
 	
 func verify_death():
 	# check Y
-	if DEATH_DEPTH != -1:
+	if CAN_DIE_FROM_DEPTH:
 		if position.y >= DEATH_DEPTH:
 			die()
 	
