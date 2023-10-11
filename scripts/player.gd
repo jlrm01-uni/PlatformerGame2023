@@ -16,7 +16,18 @@ var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var jump_sound = preload("res://assets/sounds/kenney_interfacesounds/Audio/select_001.ogg")
 
+# DEATH-related stuff
+@export var DEPTH_CAN_KILL: bool = true
+@export var DEATH_DEPTH: int = 0
+@onready var animation_player = $AnimationPlayer
+@onready var death_particles = $DeathParticles
+var is_dying = false
+# end of DEATH-related stuff
+
 func _physics_process(delta):
+	if is_dying:
+		return
+		
 	# apply gravity to player, only when not touching the floor
 	if not is_on_floor() and not is_player_dashing:
 		velocity.y += GRAVITY * delta
@@ -49,6 +60,21 @@ func _physics_process(delta):
 		sprite_2d.flip_h = true
 		
 	move_and_slide()
+	
+	verify_death()
+	
+func verify_death():
+	# check Y coordinate to see if we should die
+	if DEPTH_CAN_KILL:
+		if position.y >= DEATH_DEPTH:
+			die()
+	
+func die():
+	is_dying = true
+	animation_player.play("death_animation")
+		
+func after_death_animation():
+	get_tree().reload_current_scene()
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():

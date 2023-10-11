@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cso6xka8c0ij4"]
+[gd_scene load_steps=14 format=3 uid="uid://cso6xka8c0ij4"]
 
 [ext_resource type="Texture2D" uid="uid://ba4ms2xelnd4b" path="res://assets/art/characters/character_0000.png" id="1_fam8s"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ubv0e"]
@@ -30,6 +30,92 @@ scale_min = 0.1
 scale_max = 0.8
 color_ramp = SubResource("GradientTexture1D_kjxne")
 
+[sub_resource type="Gradient" id="Gradient_u607b"]
+offsets = PackedFloat32Array(0.00740741, 1)
+colors = PackedColorArray(0.976471, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nvxe2"]
+gradient = SubResource("Gradient_u607b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vqho5"]
+emission_shape = 1
+emission_sphere_radius = 5.0
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = 197.0
+angular_velocity_max = 197.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.2
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_nvxe2")
+
+[sub_resource type="Animation" id="Animation_j3fqe"]
+resource_name = "death_animation"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DeathParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"after_death_animation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_x1712"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mgr7s"]
+_data = {
+"RESET": SubResource("Animation_x1712"),
+"death_animation": SubResource("Animation_j3fqe")
+}
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 30
 script = ExtResource("1_ubv0e")
@@ -54,5 +140,19 @@ process_material = SubResource("ParticleProcessMaterial_1d5oy")
 texture = ExtResource("3_f4fd8")
 lifetime = 0.2
 one_shot = true
+
+[node name="DeathParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_vqho5")
+texture = ExtResource("3_f4fd8")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mgr7s")
+}
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
