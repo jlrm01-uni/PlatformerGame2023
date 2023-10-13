@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d4ae6r5fa1p42"]
+[gd_scene load_steps=15 format=3 uid="uid://d4ae6r5fa1p42"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_d6s8w"]
 [ext_resource type="Texture2D" uid="uid://f5svv8ato4i1" path="res://assets/art/tiles/tiles_packed.png" id="1_qt7fs"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://cd7l743mmwp0k" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="4_wbwyi"]
 [ext_resource type="PackedScene" uid="uid://bosucnj5jdsys" path="res://items/goal_flag.tscn" id="7_rawsp"]
 [ext_resource type="PackedScene" uid="uid://ckfmse1fplmv6" path="res://NPCs/standing_npc.tscn" id="8_ifa7u"]
+[ext_resource type="PackedScene" uid="uid://6g3i00bhrtv" path="res://other_scenes/death_zone.tscn" id="9_yfurl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aiiyq"]
 texture = ExtResource("1_qt7fs")
@@ -47,6 +48,14 @@ sources/0 = SubResource("TileSetAtlasSource_aiiyq")
 
 [sub_resource type="LabelSettings" id="LabelSettings_7rlnx"]
 font = ExtResource("4_wbwyi")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2c261"]
+resource_local_to_scene = true
+size = Vector2(131, 48.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_arxvq"]
+resource_local_to_scene = true
+size = Vector2(148, 48.5)
 
 [node name="level" type="Node2D"]
 texture_filter = 1
@@ -99,4 +108,20 @@ position = Vector2(357, 59)
 position = Vector2(298, 62)
 timelines = Array[String](["res://NPCs/npc_timelines/level1_npc_timeline1.dtl", "res://NPCs/npc_timelines/level1_npc_timeline2.dtl"])
 
+[node name="DeathZone" parent="." instance=ExtResource("9_yfurl")]
+position = Vector2(630, 256)
+
+[node name="CollisionShape2D" parent="DeathZone" index="0"]
+position = Vector2(6.5, 16.75)
+shape = SubResource("RectangleShape2D_2c261")
+
+[node name="DeathZone2" parent="." instance=ExtResource("9_yfurl")]
+position = Vector2(890, 248)
+
+[node name="CollisionShape2D" parent="DeathZone2" index="0"]
+position = Vector2(71, -2)
+shape = SubResource("RectangleShape2D_arxvq")
+
 [editable path="Player"]
+[editable path="DeathZone"]
+[editable path="DeathZone2"]
