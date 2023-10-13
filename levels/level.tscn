@@ -62,6 +62,17 @@ layer_0/tile_data = PackedInt32Array(131075, 65536, 0, 196616, 65536, 0, 262157,
 position = Vector2(239, 35)
 DEATH_DEPTH = 126
 
+[node name="Marker2D" parent="Player" index="7"]
+start = null
+end = null
+
+[node name="EndMarker" parent="Player/Marker2D" index="1"]
+position = Vector2(0, 99)
+
+[node name="Line2D" parent="Player/Marker2D" index="2"]
+points = PackedVector2Array(0, 0, 0, 99)
+width = 2.0
+
 [node name="coins" type="Node2D" parent="."]
 
 [node name="coin" parent="coins" instance=ExtResource("3_mnsvj")]
@@ -98,3 +109,6 @@ position = Vector2(357, 59)
 [node name="StandingNPC" parent="." instance=ExtResource("8_ifa7u")]
 position = Vector2(298, 62)
 timelines = Array[String](["res://NPCs/npc_timelines/level1_npc_timeline1.dtl", "res://NPCs/npc_timelines/level1_npc_timeline2.dtl"])
+
+[editable path="Player"]
+[editable path="Player/Marker2D"]

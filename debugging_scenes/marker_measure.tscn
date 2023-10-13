@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs7honihofbrp"]
+
+[ext_resource type="Texture2D" uid="uid://bleg48taunlpp" path="res://assets/art/debug/crosshair.png" id="1_1taav"]
+[ext_resource type="Script" path="res://scripts/marker_measure.gd" id="1_j52ln"]
+
+[node name="MarkerMeasure" type="Node2D"]
+script = ExtResource("1_j52ln")
+
+[node name="StartMarker" type="Marker2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StartMarker"]
+texture = ExtResource("1_1taav")
+
+[node name="EndMarker" type="Marker2D" parent="."]
+position = Vector2(59, 55)
+
+[node name="Sprite2D" type="Sprite2D" parent="EndMarker"]
+texture = ExtResource("1_1taav")
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 2.0
+default_color = Color(0.933333, 0.839216, 0.0588235, 1)
