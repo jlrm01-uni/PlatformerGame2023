@@ -5,6 +5,9 @@ extends CharacterBody2D
 @export var JUMP_VELOCITY = -400
 @onready var sprite_2d = $Sprite2D
 
+@onready var camera_2d = $Camera2D
+var ZOOM_INCREASE = Vector2(.1, .1)
+
 @export_category("Dash")
 # these are related to the dash
 @onready var dash_timer = $DashTimer
@@ -41,6 +44,7 @@ var max_y_reached_yet
 @export_category("Debugging")
 @export var DEBUGGING = true
 @onready var marker_measure = $MarkerMeasure
+@onready var zoom_level:Vector2 = Vector2(2, 2)
 
 func _physics_process(delta):
 	# apply gravity to player, only when not touching the floor
@@ -83,6 +87,15 @@ func _physics_process(delta):
 	verify_death()
 	handle_fall()
 	
+	if DEBUGGING:
+		handle_process_debugging()
+	
+func handle_process_debugging():
+	if Input.is_action_just_pressed("zoom in"):
+		camera_2d.zoom += ZOOM_INCREASE
+	elif Input.is_action_just_pressed("zoom out"):
+		camera_2d.zoom -= ZOOM_INCREASE
+		
 func handle_fall():
 	if is_on_floor():
 		var fall_height = abs(max_y_reached_yet - position.y)
