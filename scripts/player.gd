@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+enum death_types {DEATH_BY_HEIGHT, NORMAL_DEATH, DEATH_BY_FALLING}
+
 @export_category("Movement")
 @export var SPEED = 300
 @export var JUMP_VELOCITY = -400
@@ -45,6 +47,7 @@ var max_y_reached_yet
 @export var DEBUGGING = true
 @onready var marker_measure = $MarkerMeasure
 @onready var zoom_level:Vector2 = Vector2(2, 2)
+@onready var godot_essentials_shake_camera_component_2d = $Camera2D/GodotEssentialsShakeCameraComponent2D
 
 func _physics_process(delta):
 	# apply gravity to player, only when not touching the floor
@@ -101,7 +104,7 @@ func handle_fall():
 		var fall_height = abs(max_y_reached_yet - position.y)
 		
 		if fall_height > MAX_PIXEL_SAFE_HEIGHT:
-			die()
+			die(death_types.DEATH_BY_FALLING)
 		else:
 			max_y_reached_yet = position.y
 	else:
@@ -111,11 +114,15 @@ func verify_death():
 	# check Y
 	if CAN_DIE_FROM_DEPTH:
 		if position.y >= DEATH_DEPTH:
-			die()
+			die(death_types.DEATH_BY_HEIGHT)
 	
-func die():
+func die(reason=death_types.NORMAL_DEATH):
 	is_dying = true
 	IS_INPUT_DISABLED = true
+	
+	if reason == death_types.DEATH_BY_FALLING:
+		godot_essentials_shake_camera_component_2d.shake()
+		
 	animation_player.play("death_animation")
 	
 # Called when the node enters the scene tree for the first time.
@@ -124,7 +131,8 @@ func _ready():
 	max_y_reached_yet = position.y  # make sure we record the player's initial position
 	
 	if DEBUGGING:
-		marker_measure.end = Vector2(0, MAX_PIXEL_SAFE_HEIGHT)
+		pass
+#		marker_measure.set_end(Vector2(0, MAX_PIXEL_SAFE_HEIGHT))
 	else:
 		marker_measure.visible = false
 		marker_measure.set_process(false)

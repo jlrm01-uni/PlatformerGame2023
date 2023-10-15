@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://ba4ms2xelnd4b" path="res://assets/art/characters/character_0000.png" id="1_fam8s"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ubv0e"]
+[ext_resource type="Script" path="res://addons/2d_essentials/camera/shake_camera_component.gd" id="3_70hye"]
 [ext_resource type="Texture2D" uid="uid://bya2eisxn26cc" path="res://assets/particle textures/star_white.png" id="3_f4fd8"]
-[ext_resource type="PackedScene" uid="uid://cs7honihofbrp" path="res://debugging_scenes/marker_measure.tscn" id="4_f31nu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1nkwh"]
 radius = 9.0
@@ -133,7 +133,6 @@ collision_mask = 30
 script = ExtResource("1_ubv0e")
 CAN_DIE_FROM_DEPTH = false
 affected_by_gravity = false
-MAX_PIXEL_SAFE_HEIGHT = 200
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -144,6 +143,9 @@ shape = SubResource("CapsuleShape2D_1nkwh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+
+[node name="GodotEssentialsShakeCameraComponent2D" type="Node2D" parent="Camera2D"]
+script = ExtResource("3_70hye")
 
 [node name="DashTimer" type="Timer" parent="."]
 
@@ -169,8 +171,5 @@ explosiveness = 1.0
 libraries = {
 "": SubResource("AnimationLibrary_ltkpj")
 }
-
-[node name="MarkerMeasure" parent="." instance=ExtResource("4_f31nu")]
-end = Vector2(59, 55)
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

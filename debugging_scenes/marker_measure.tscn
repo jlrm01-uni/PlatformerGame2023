@@ -1,10 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://cs7honihofbrp"]
+[gd_scene load_steps=5 format=3 uid="uid://cs7honihofbrp"]
 
 [ext_resource type="Texture2D" uid="uid://bleg48taunlpp" path="res://assets/art/debug/crosshair.png" id="1_1taav"]
 [ext_resource type="Script" path="res://scripts/marker_measure.gd" id="1_j52ln"]
 
+[sub_resource type="SystemFont" id="SystemFont_lu8d0"]
+font_names = PackedStringArray("Sans-Serif")
+
+[sub_resource type="LabelSettings" id="LabelSettings_vkvy6"]
+font = SubResource("SystemFont_lu8d0")
+font_size = 9
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
 [node name="MarkerMeasure" type="Node2D"]
+show_behind_parent = true
 script = ExtResource("1_j52ln")
+start_node_path = null
+end_node_path = null
 
 [node name="StartMarker" type="Marker2D" parent="."]
 
@@ -20,3 +32,16 @@ texture = ExtResource("1_1taav")
 [node name="Line2D" type="Line2D" parent="."]
 width = 2.0
 default_color = Color(0.933333, 0.839216, 0.0588235, 1)
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 40.0
+offset_bottom = 11.5
+grow_vertical = 2
+text = "X: 0 Y: 0"
+label_settings = SubResource("LabelSettings_vkvy6")
+vertical_alignment = 1

@@ -8,6 +8,15 @@
 
 config_version=5
 
+[PlatformerGame]
+
+config/achievements/local_source="res://"
+config/achievements/remote_source="https://"
+config/achievements/save_directory="C:/Users/jlrm0/AppData/Roaming/Godot/app_userdata/PlatformerGame"
+config/achievements/save_file_name="achievements.json"
+config/achievements/password="yMiQId2JMYHIsBbMRP3c0zX2N"
+config/godotenv/root_directory="res://"
+
 [application]
 
 config/name="PlatformerGame"
@@ -21,6 +30,11 @@ GameState="*res://scripts/game_state.gd"
 AudioManager="*res://globals/audio_manager.tscn"
 Dialogic="*res://addons/dialogic/Other/DialogicGameHandler.gd"
 FadeScreen="*res://globals/fade_screen.tscn"
+GodotEssentialsHelpers="*res://addons/2d_essentials/autoload/helpers.gd"
+GodotEssentialsAudio="*res://addons/2d_essentials/autoload/audio/audio.gd"
+GodotEssentialsSceneTransitioner="*res://addons/2d_essentials/autoload/scene_transitions/scene_transitioner.gd"
+GodotEssentialsAchievements="*res://addons/2d_essentials/autoload/achievements/achievements.tscn"
+GodotEssentialsEnvironment="*res://addons/2d_essentials/autoload/dotenv/godotenv.gd"
 
 [dialogic]
 
@@ -47,7 +61,7 @@ glossary/default_case_sensitive=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
+enabled=PackedStringArray("res://addons/2d_essentials/plugin.cfg", "res://addons/dialogic/plugin.cfg")
 
 [input]
 
