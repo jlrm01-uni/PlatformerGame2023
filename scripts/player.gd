@@ -24,6 +24,12 @@ var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_dying = false
 # end of DEATH-related stuff
 
+# Death from falling-related
+@export var MAX_PIXEL_SAFE_HEIGHT = 100
+@export var can_die_from_fall = true
+var max_y_reached_yet
+# End of Death from falling-related stuff
+
 func _physics_process(delta):
 	if is_dying:
 		return
@@ -62,6 +68,19 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	verify_death()
+	handle_fall()
+	
+func handle_fall():
+	if is_on_floor():
+		var fall_height = abs(max_y_reached_yet - position.y)
+		
+		if fall_height > MAX_PIXEL_SAFE_HEIGHT:
+			die()
+		else:
+			max_y_reached_yet = position.y
+	else:
+		max_y_reached_yet = min(max_y_reached_yet, position.y)
+		
 	
 func verify_death():
 	# check Y coordinate to see if we should die
@@ -79,7 +98,7 @@ func after_death_animation():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	AudioManager.register("player_jump_sound", jump_sound)
-
+	max_y_reached_yet = position.y
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
