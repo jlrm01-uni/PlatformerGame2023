@@ -40,7 +40,7 @@ func _on_play_button_pressed():
 	
 	await sounds_audio_stream_player.finished
 	
-	get_tree().change_scene_to_file("res://levels/level.tscn")
+	FadeScreen.transition_to("res://levels/level.tscn")
 
 
 func _on_load_button_pressed():

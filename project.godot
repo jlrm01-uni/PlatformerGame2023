@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameState="*res://scripts/game_state.gd"
 AudioManager="*res://globals/audio_manager.tscn"
 Dialogic="*res://addons/dialogic/Other/DialogicGameHandler.gd"
+FadeScreen="*res://globals/fade_screen.tscn"
 
 [editor_plugins]
 
