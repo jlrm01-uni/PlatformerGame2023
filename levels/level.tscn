@@ -92,7 +92,7 @@ label_settings = SubResource("LabelSettings_7rlnx")
 
 [node name="GoalFlag" parent="." instance=ExtResource("7_rawsp")]
 position = Vector2(164, 29)
-scene = "res://menu.tscn"
+scene = "res://cutscenes/cutscene_1.tscn"
 
 [node name="coin" parent="." instance=ExtResource("3_mnsvj")]
 position = Vector2(357, 59)
