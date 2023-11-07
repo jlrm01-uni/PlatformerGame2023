@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://rdrimbh7ggg5"]
+
+[ext_resource type="Script" path="res://scripts/spikey.gd" id="1_v2ukp"]
+[ext_resource type="Texture2D" uid="uid://dec8mg8heq5t" path="res://assets/art/enemies/character_0008.png" id="2_mrilc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r3c2h"]
+radius = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlu3x"]
+size = Vector2(157, 55)
+
+[node name="Spikey" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_v2ukp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_mrilc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_r3c2h")
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2(-0.5, -17.5)
+shape = SubResource("RectangleShape2D_tlu3x")
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_player_detector_body_exited"]

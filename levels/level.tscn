@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d4ae6r5fa1p42"]
+[gd_scene load_steps=14 format=3 uid="uid://d4ae6r5fa1p42"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_d6s8w"]
 [ext_resource type="Texture2D" uid="uid://f5svv8ato4i1" path="res://assets/art/tiles/tiles_packed.png" id="1_qt7fs"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://cskll076acrs3" path="res://assets/art/single tiles/tile_0151.png" id="4_8fayk"]
 [ext_resource type="FontFile" uid="uid://cd7l743mmwp0k" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="4_wbwyi"]
 [ext_resource type="PackedScene" uid="uid://bosucnj5jdsys" path="res://items/goal_flag.tscn" id="7_rawsp"]
+[ext_resource type="PackedScene" uid="uid://dyehle4uy3ueq" path="res://items/spikes.tscn" id="9_sbauw"]
+[ext_resource type="PackedScene" uid="uid://rdrimbh7ggg5" path="res://enemies/spikey.tscn" id="10_qafy8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aiiyq"]
 texture = ExtResource("1_qt7fs")
@@ -60,7 +62,7 @@ format = 2
 layer_0/tile_data = PackedInt32Array(131075, 65536, 0, 196616, 65536, 0, 262157, 65536, 0, 262160, 65536, 0, 262161, 65536, 0, 262162, 65536, 0, 262163, 65536, 0, 262164, 65536, 0, 262165, 65536, 0, 262166, 65536, 0, 262167, 65536, 0, 262168, 65536, 0, 262169, 65536, 0, 262170, 65536, 0, 262171, 65536, 0, 458782, 65536, 0, 458783, 65536, 0, 458784, 65536, 0, 458785, 65536, 0, 458786, 65536, 0, 458787, 65536, 0, 458788, 65536, 0, 458789, 65536, 0, 458790, 65536, 0, 458791, 65536, 0, 524297, 65536, 0, 524296, 65536, 0, 524295, 65536, 0, 524294, 65536, 0, 524293, 65536, 0, 524292, 65536, 0, 524291, 65536, 0, 524290, 65536, 0, 524289, 65536, 0, 524288, 65536, 0, 589823, 65536, 0, 589822, 65536, 0, 589821, 65536, 0, 589820, 65536, 0, 589819, 65536, 0, 786472, 65536, 0, 786473, 65536, 0, 786474, 65536, 0, 786475, 65536, 0, 786476, 65536, 0, 786477, 65536, 0, 786478, 65536, 0, 786479, 65536, 0, 786480, 65536, 0, 786481, 65536, 0, 786482, 65536, 0, 851997, 65536, 0, 851996, 65536, 0, 851995, 65536, 0, 851994, 65536, 0, 851993, 65536, 0, 851992, 65536, 0, 851991, 65536, 0, 851990, 65536, 0, 851989, 65536, 0, 851988, 65536, 0, 851987, 65536, 0, 851986, 65536, 0, 851985, 65536, 0, 851984, 65536, 0, 851983, 65536, 0, 851982, 65536, 0)
 
 [node name="Player" parent="." instance=ExtResource("2_nyd2j")]
-position = Vector2(648, 118)
+position = Vector2(648, 112)
 DEPTH_CAN_KILL = false
 DEATH_DEPTH = 104
 
@@ -96,3 +98,9 @@ scene = "res://cutscenes/cutscene_1.tscn"
 
 [node name="coin" parent="." instance=ExtResource("3_mnsvj")]
 position = Vector2(357, 59)
+
+[node name="Spikes" parent="." instance=ExtResource("9_sbauw")]
+position = Vector2(693, 119)
+
+[node name="Spikey" parent="." instance=ExtResource("10_qafy8")]
+position = Vector2(539, 117)
