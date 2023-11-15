@@ -1,8 +1,45 @@
-[gd_scene format=3 uid="uid://e8snvyqjih1x"]
+[gd_scene load_steps=4 format=3 uid="uid://e8snvyqjih1x"]
 
-[node name="level" type="Node2D"]
+[ext_resource type="Script" path="res://scripts/credits.gd" id="1_cqgdv"]
+[ext_resource type="FontFile" uid="uid://cd7l743mmwp0k" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="1_xw2pn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hl6lg"]
+font = ExtResource("1_xw2pn")
+font_size = 28
+
+[node name="credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cqgdv")
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
-text = "Credits Under Construction"
+text = "Thanks to:
+
+Art by Kenney "
+label_settings = SubResource("LabelSettings_hl6lg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -203.0
+offset_top = -61.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="BackToMenu" type="Button" parent="MarginContainer"]
+layout_mode = 2
+text = "Return to Main Menu"
+
+[connection signal="pressed" from="MarginContainer/BackToMenu" to="." method="_on_back_to_menu_pressed"]

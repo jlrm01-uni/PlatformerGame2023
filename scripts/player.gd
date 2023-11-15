@@ -89,12 +89,21 @@ func verify_death():
 			die()
 	
 func die():
+	if is_dying:
+		return
+		
 	is_dying = true
 	animation_player.play("death_animation")
-		
-func after_death_animation():
-	get_tree().reload_current_scene()
+	GameState.lives = GameState.lives - 1
 	
+func after_death_animation():
+	print(GameState.lives)
+	
+	if GameState.lives > 0:
+		get_tree().reload_current_scene()
+	else:
+		get_tree().change_scene_to_file("res://other_scenes/game_over_screen.tscn")
+		
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	AudioManager.register("player_jump_sound", jump_sound)

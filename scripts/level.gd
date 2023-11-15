@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var number_of_coins = $CanvasLayer/MarginContainer/HBoxContainer/NumberOfCoins
 @export var level_music: AudioStream
+@onready var lives = $CanvasLayer/MarginContainer/HBoxContainer/Lives
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,3 +15,4 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	number_of_coins.text = str(GameState.current_coins)
+	lives.text = str(GameState.lives)
